@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "contact"
+rootProject.name = "xdd1"
 include(":app")
  
