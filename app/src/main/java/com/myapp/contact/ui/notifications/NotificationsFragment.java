@@ -27,6 +27,7 @@ private FragmentNotificationsBinding binding;
         return root;
     }
 
+
 @Override
     public void onDestroyView() {
         super.onDestroyView();
