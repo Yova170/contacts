@@ -1,0 +1,116 @@
+Index: app/src/main/res/navigation/mobile_navigation.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<navigation xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/mobile_navigation\"\r\n    app:startDestination=\"@+id/navigation_home\">\r\n\r\n    <fragment\r\n        android:id=\"@+id/navigation_home\"\r\n        android:name=\"com.myapp.contact.ui.home.HomeFragment\"\r\n        android:label=\"@string/title_home\"\r\n        tools:layout=\"@layout/fragment_home\" />\r\n\r\n    <fragment\r\n        android:id=\"@+id/navigation_dashboard\"\r\n        android:name=\"com.myapp.contact.ui.dashboard.DashboardFragment\"\r\n        android:label=\"@string/title_dashboard\"\r\n        tools:layout=\"@layout/fragment_dashboard\" />\r\n\r\n    <fragment\r\n        android:id=\"@+id/navigation_notifications\"\r\n        android:name=\"com.myapp.contact.ui.notifications.NotificationsFragment\"\r\n        android:label=\"@string/title_notifications\"\r\n        tools:layout=\"@layout/fragment_notifications\" />\r\n</navigation>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/navigation/mobile_navigation.xml b/app/src/main/res/navigation/mobile_navigation.xml
+--- a/app/src/main/res/navigation/mobile_navigation.xml	(revision a3e6aeab6c233c86ddee9b56f8048387ee2c5aef)
++++ b/app/src/main/res/navigation/mobile_navigation.xml	(date 1718216691262)
+@@ -2,24 +2,24 @@
+ <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+-    android:id="@+id/mobile_navigation"
+-    app:startDestination="@+id/navigation_home">
++    android:id="@+id/mobile_favorite"
++    app:startDestination="@+id/navigation_favorite">
+ 
+     <fragment
+-        android:id="@+id/navigation_home"
++        android:id="@+id/navigation_favorite"
+         android:name="com.myapp.contact.ui.home.HomeFragment"
+-        android:label="@string/title_home"
++        android:label="Favoritos"
+         tools:layout="@layout/fragment_home" />
+ 
+     <fragment
+-        android:id="@+id/navigation_dashboard"
++        android:id="@+id/navigation_contactos"
+         android:name="com.myapp.contact.ui.dashboard.DashboardFragment"
+-        android:label="@string/title_dashboard"
++        android:label="Contactos"
+         tools:layout="@layout/fragment_dashboard" />
+ 
+     <fragment
+-        android:id="@+id/navigation_notifications"
++        android:id="@+id/navigation_add"
+         android:name="com.myapp.contact.ui.notifications.NotificationsFragment"
+-        android:label="@string/title_notifications"
++        android:label="Add Contactos"
+         tools:layout="@layout/fragment_notifications" />
+ </navigation>
+\ No newline at end of file
+Index: app/src/main/java/com/myapp/contact/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.myapp.contact;\r\n\r\nimport android.os.Bundle;\r\nimport com.google.android.material.bottomnavigation.BottomNavigationView;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.navigation.NavController;\r\nimport androidx.navigation.Navigation;\r\nimport androidx.navigation.ui.AppBarConfiguration;\r\nimport androidx.navigation.ui.NavigationUI;\r\nimport com.myapp.contact.databinding.ActivityMainBinding;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\nprivate ActivityMainBinding binding;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n\r\n     binding = ActivityMainBinding.inflate(getLayoutInflater());\r\n     setContentView(binding.getRoot());\r\n\r\n        BottomNavigationView navView = findViewById(R.id.nav_view);\r\n        // Passing each menu ID as a set of Ids because each\r\n        // menu should be considered as top level destinations.\r\n        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(\r\n                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)\r\n                .build();\r\n        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);\r\n        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);\r\n        NavigationUI.setupWithNavController(binding.navView, navController);\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/myapp/contact/MainActivity.java b/app/src/main/java/com/myapp/contact/MainActivity.java
+--- a/app/src/main/java/com/myapp/contact/MainActivity.java	(revision a3e6aeab6c233c86ddee9b56f8048387ee2c5aef)
++++ b/app/src/main/java/com/myapp/contact/MainActivity.java	(date 1718216490149)
+@@ -24,7 +24,7 @@
+         // Passing each menu ID as a set of Ids because each
+         // menu should be considered as top level destinations.
+         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
++                R.id.navigation_favorite, R.id.navigation_contactos, R.id.navigation_add)
+                 .build();
+         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
+         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+Index: app/src/main/res/menu/bottom_nav_menu.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<menu xmlns:android=\"http://schemas.android.com/apk/res/android\">\r\n\r\n    <item\r\n        android:id=\"@+id/navigation_home\"\r\n        android:icon=\"@drawable/ic_home_black_24dp\"\r\n        android:title=\"@string/title_home\"/>\r\n\r\n    <item\r\n        android:id=\"@+id/navigation_dashboard\"\r\n        android:icon=\"@drawable/ic_dashboard_black_24dp\"\r\n        android:title=\"@string/title_dashboard\"/>\r\n\r\n    <item\r\n        android:id=\"@+id/navigation_notifications\"\r\n        android:icon=\"@drawable/ic_notifications_black_24dp\"\r\n        android:title=\"@string/title_notifications\"/>\r\n\r\n</menu>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/menu/bottom_nav_menu.xml b/app/src/main/res/menu/bottom_nav_menu.xml
+--- a/app/src/main/res/menu/bottom_nav_menu.xml	(revision a3e6aeab6c233c86ddee9b56f8048387ee2c5aef)
++++ b/app/src/main/res/menu/bottom_nav_menu.xml	(date 1718216340842)
+@@ -2,18 +2,18 @@
+ <menu xmlns:android="http://schemas.android.com/apk/res/android">
+ 
+     <item
+-        android:id="@+id/navigation_home"
++        android:id="@+id/navigation_favoritos"
+         android:icon="@drawable/ic_home_black_24dp"
+-        android:title="@string/title_home"/>
++        android:title="Favoritos"/>
+ 
+     <item
+-        android:id="@+id/navigation_dashboard"
++        android:id="@+id/navigation_contactos"
+         android:icon="@drawable/ic_dashboard_black_24dp"
+-        android:title="@string/title_dashboard"/>
++        android:title="contactos"/>
+ 
+     <item
+-        android:id="@+id/navigation_notifications"
++        android:id="@+id/navigation_add"
+         android:icon="@drawable/ic_notifications_black_24dp"
+-        android:title="@string/title_notifications"/>
++        android:title="Add"/>
+ 
+ </menu>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"#GRADLE_LOCAL_JAVA_HOME\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveExternalAnnotations\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision a3e6aeab6c233c86ddee9b56f8048387ee2c5aef)
++++ b/.idea/gradle.xml	(date 1718338594540)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>

@@ -73,7 +73,7 @@
         app:layout_constraintVertical_bias="0.239" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn_eliminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Eliminar"
@@ -85,7 +85,7 @@
         app:layout_constraintVertical_bias="0.377" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_modificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Modificar"

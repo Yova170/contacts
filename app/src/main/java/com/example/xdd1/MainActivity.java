@@ -1,6 +1,8 @@
 package com.example.xdd1;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +16,12 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, ListAdapter.OnItemClickListener {
     List<ListElements> elements;
@@ -88,4 +94,31 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public boolean onQueryTextChange(String newText) {
         return false;
     }
+
+    public void listaContactos() {
+        SharedPreferences preferences = getSharedPreferences("contactos_lista", Context.MODE_PRIVATE);
+        Map<String, ?> allEntries = preferences.getAll();
+
+        StringBuilder contactos = new StringBuilder();
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            try {
+                JSONObject contacto = new JSONObject(entry.getValue().toString());
+                int id = contacto.getInt("id");
+                String nombre = contacto.getString("nombre");
+                String telefono = contacto.getString("telefono");
+
+
+                contactos.append("ID: ").append(id)
+                        .append(", Nombre: ").append(nombre)
+                        .append(", Teléfono: ").append(telefono)
+                        .append("\n");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Mostrar los contactos en algún TextView o cualquier otro elemento de UI
+        //textViewContactos.setText(contactos.toString());
+    }
+
 }
