@@ -1,4 +1,4 @@
-package com.myapp.contact;
+package com.example.xdd1;
 
 import org.junit.Test;
 
