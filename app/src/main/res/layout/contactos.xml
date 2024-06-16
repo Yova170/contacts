@@ -67,6 +67,7 @@
 
             </LinearLayout>
 
+<<<<<<< HEAD
             <EditText
                 android:id="@+id/id"
                 android:layout_width="18dp"
@@ -76,6 +77,8 @@
                 android:focusable="false"
                 android:visibility="invisible"/>
 
+=======
+>>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
         </RelativeLayout>
 
 

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+<<<<<<< HEAD
 
     //Definimos una lista de elementos
     private List<ListElements> mData;
@@ -27,10 +28,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private Context mContext;  // Contexto de la aplicación
 
     // Interfaz para el listener de clic en los elementos del RecyclerView
+=======
+    private List<ListElements> mData;
+    private LayoutInflater mInflater;
+    private OnItemClickListener listener;
+    private Context mContext;
+
+>>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
     public interface OnItemClickListener {
         void onItemClick(ListElements item);
     }
 
+<<<<<<< HEAD
 
     public ListAdapter(List<ListElements> itemList, Context context, OnItemClickListener listener) {
         this.mInflater = LayoutInflater.from(context);  // Inicialización del LayoutInflater
@@ -40,11 +49,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     // Retorna la cantidad de elementos en la lista
+=======
+    public ListAdapter(List<ListElements> itemList, Context context, OnItemClickListener listener) {
+        this.mInflater = LayoutInflater.from(context);
+        this.mData = itemList;
+        this.listener = listener;
+        this.mContext = context;
+    }
+
+>>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
     @Override
     public int getItemCount() {
         return mData.size();
     }
 
+<<<<<<< HEAD
     // Crea y retorna un nuevo ViewHolder que contiene la vista de un elemento de la lista
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -84,10 +103,47 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 public void onClick(View v) {
                     String phoneNumber = mData.get(getAdapterPosition()).getTel();  // Obtiene el número de teléfono del elemento actual
                     llamar(phoneNumber);  // Llama al método llamar() para iniciar la llamada telefónica
+=======
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.contactos, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.binData(mData.get(position));
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView nombre, tel;
+        ImageView llamarIcon;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+            nombre = itemView.findViewById(R.id.nom);
+            tel = itemView.findViewById(R.id.te);
+            llamarIcon = itemView.findViewById(R.id.xd);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(mData.get(getAdapterPosition()));
+                }
+            });
+
+            // Configurar el OnClickListener para el icono de la llamada
+            llamarIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String phoneNumber = mData.get(getAdapterPosition()).getTel();
+                    llamar(phoneNumber);
+>>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
                 }
             });
         }
 
+<<<<<<< HEAD
         // Método para vincular los datos de un elemento con los elementos de la vista
         void bindData(final ListElements item) {
             nombre.setText(item.getNombre());  // Establece el nombre del contacto en el TextView correspondiente
@@ -114,4 +170,22 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         notifyDataSetChanged();  // Notifica al RecyclerView que los datos han cambiado
     }
 
+=======
+        void binData(final ListElements item) {
+            nombre.setText(item.getNombre());
+            tel.setText(item.getTel());
+        }
+    }
+
+
+    @SuppressLint("QueryPermissionsNeeded")
+    private void llamar(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+
+        if (intent.resolveActivity(mContext.getPackageManager()) != null) {
+            mContext.startActivity(intent);
+        }
+    }
+>>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
 }

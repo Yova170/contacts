@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -25,20 +26,33 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private List<ListElements> elements; // Lista de elementos de contactos
     private ListAdapter listAdapter; // Adaptador para el RecyclerView
     private SearchView searchView; // Vista de búsqueda
+=======
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, ListAdapter.OnItemClickListener {
+    List<ListElements> elements;
+    ListAdapter listAdapter;
+>>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+<<<<<<< HEAD
         // Habilita el borde a borde (EdgeToEdge) para la actividad
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main); // Establece el layout de la actividad
+=======
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+>>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+<<<<<<< HEAD
         // Configura la vista de búsqueda y el listener de texto de búsqueda
         searchView = findViewById(R.id.busqueda);
         searchView.setOnQueryTextListener(this);
@@ -67,12 +81,23 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     // Método para iniciar una llamada telefónica
+=======
+        init();
+    }
+
+    public void anadir(View view) {
+        Intent intent = new Intent(this, add.class);
+        startActivity(intent);
+    }
+
+>>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
     public void llamar(String phoneNumber) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + phoneNumber));
         startActivity(intent);
     }
 
+<<<<<<< HEAD
     // Método para inicializar la lista de contactos
     public void init() {
         elements = XmlParser.parseContacts(this); // Parsea los contactos desde un archivo XML
@@ -86,6 +111,25 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         });
 
         // Configura el adaptador para el RecyclerView
+=======
+    public void init() {
+        elements = new ArrayList<>();
+        elements.add(new ListElements("Bryan", "65486053"));
+        elements.add(new ListElements("Piruliws", "65486053"));
+        elements.add(new ListElements("Bran", "65486053"));
+        elements.add(new ListElements("Bradley", "65486053"));
+        elements.add(new ListElements("Allan", "65486053"));
+        elements.add(new ListElements("Pepe", "65486053"));
+        elements.add(new ListElements("Joseph", "65486053"));
+        elements.add(new ListElements("Bryan", "65486053"));
+        elements.add(new ListElements("Piruliws", "65486053"));
+        elements.add(new ListElements("Bran", "65486053"));
+        elements.add(new ListElements("Bradley", "65486053"));
+        elements.add(new ListElements("Allan", "65486053"));
+        elements.add(new ListElements("Pepe", "65486053"));
+        elements.add(new ListElements("Joseph", "65486053"));
+
+>>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
         listAdapter = new ListAdapter(elements, this, this);
         RecyclerView recyclerView = findViewById(R.id.add);
         recyclerView.setHasFixedSize(true);
@@ -93,22 +137,32 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         recyclerView.setAdapter(listAdapter);
     }
 
+<<<<<<< HEAD
     // Método llamado cuando se hace clic en un elemento del RecyclerView
+=======
+>>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
     @Override
     public void onItemClick(ListElements item) {
         Intent intent = new Intent(this, contac.class);
         intent.putExtra("nombre", item.getNombre());
         intent.putExtra("telefono", item.getTel());
+<<<<<<< HEAD
         intent.putExtra("id", item.getNum());
         startActivityForResult(intent, REQUEST_CODE_EDIT_CONTACT);
     }
 
     // Método llamado cuando se envía el texto de búsqueda
+=======
+        startActivity(intent);
+    }
+
+>>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
 
+<<<<<<< HEAD
     // Método llamado cuando cambia el texto de búsqueda
     @Override
     public boolean onQueryTextChange(String newText) {
@@ -193,3 +247,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 }
 
+=======
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+}
+>>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
