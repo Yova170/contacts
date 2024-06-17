@@ -1,15 +1,11 @@
 package com.example.xdd1;
 
-<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-=======
-import android.os.Bundle;
->>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +13,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-<<<<<<< HEAD
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -33,25 +28,17 @@ public class add extends AppCompatActivity {
     private Button saveButton;
     private int nextId;
 
-=======
-public class add extends AppCompatActivity {
-
->>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add);
-<<<<<<< HEAD
 
-=======
->>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-<<<<<<< HEAD
         // Definir Variables
         nameEditText = findViewById(R.id.editTextText); // Nombre EditText
         phoneEditText = findViewById(R.id.editTextPhone); // Teléfono EditText
@@ -133,7 +120,3 @@ public class add extends AppCompatActivity {
 
 }
 
-=======
-    }
-}
->>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0

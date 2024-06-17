@@ -36,10 +36,7 @@
         android:id="@+id/botonIrSegundaActividad"
         android:layout_width="66dp"
         android:layout_height="75dp"
-<<<<<<< HEAD
         android:onClick="anadir"
-=======
->>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
         android:text="+"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -48,12 +45,7 @@
         app:layout_constraintHorizontal_bias="0.906"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
         app:layout_constraintVertical_bias="0.955" />
-=======
-        app:layout_constraintVertical_bias="0.955"
-        android:onClick="anadir"/>
->>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
 
     <SearchView
         android:id="@+id/busqueda"

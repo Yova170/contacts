@@ -1,23 +1,14 @@
 package com.example.xdd1;
 
 public class ListElements {
-    public String nombre;
-    public String tel;
-
-<<<<<<< HEAD
-    public String num;
-
+    private String nombre;
+    private String tel;
+    private String num;
 
     public ListElements(String nombre, String tel, String num) {
         this.nombre = nombre;
         this.tel = tel;
         this.num = num;
-=======
-
-    public ListElements(String nombre, String tel) {
-        this.nombre = nombre;
-        this.tel = tel;
->>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
     }
 
     public String getNombre() {
@@ -36,11 +27,11 @@ public class ListElements {
         this.tel = tel;
     }
 
-<<<<<<< HEAD
-    public String getNum(){return num;}
+    public String getNum() {
+        return num;
+    }
 
-    public void setNum(String id){this.num  = num;}
-=======
-
->>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
+    public void setNum(String num) {
+        this.num = num;
+    }
 }

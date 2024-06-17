@@ -57,7 +57,9 @@
         app:layout_constraintHorizontal_bias="0.766"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.161" />
+        app:layout_constraintVertical_bias="0.161"
+        android:maxLength="20"
+        />
 
     <EditText
         android:id="@+id/et2"
@@ -70,7 +72,8 @@
         app:layout_constraintHorizontal_bias="0.761"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.239" />
+        app:layout_constraintVertical_bias="0.239"
+        android:maxLength="8"/>
 
     <Button
         android:id="@+id/button4"
@@ -101,7 +104,6 @@
         app:layout_constraintVertical_bias="0.377"
         app:strokeColor="#887171" />
 
-<<<<<<< HEAD
     <EditText
         android:id="@+id/id"
         android:layout_width="wrap_content"
@@ -114,6 +116,4 @@
         android:focusable="false"
         android:visibility="invisible"/>
 
-=======
->>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
 </androidx.constraintlayout.widget.ConstraintLayout>

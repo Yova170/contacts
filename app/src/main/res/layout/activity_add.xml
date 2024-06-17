@@ -57,13 +57,9 @@
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
         app:layout_constraintVertical_bias="0.276"
         android:maxLength="8"
         />
-=======
-        app:layout_constraintVertical_bias="0.276" />
->>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
 
     <EditText
         android:id="@+id/editTextText"
@@ -76,12 +72,8 @@
         app:layout_constraintHorizontal_bias="0.805"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
         app:layout_constraintVertical_bias="0.198"
         android:maxLength="20"/>
-=======
-        app:layout_constraintVertical_bias="0.198" />
->>>>>>> aa1eea8cb327ab6ff8204329362bc104bc291ba0
 
     <Button
         android:id="@+id/button"
