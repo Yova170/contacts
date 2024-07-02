@@ -13,20 +13,25 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import com.example.xdd1.ConexionApi.ApiService;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class add extends AppCompatActivity {
 
     // Definimos Variables
     private EditText nameEditText;
     private EditText phoneEditText;
+    private String urlApi="https://92c5-190-219-102-217.ngrok-free.app";
     private Button saveButton;
     private int nextId;
+    private ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,7 @@ public class add extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         // Definir Variables
         nameEditText = findViewById(R.id.editTextText); // Nombre EditText
         phoneEditText = findViewById(R.id.editTextPhone); // Teléfono EditText
@@ -47,76 +53,51 @@ public class add extends AppCompatActivity {
         // Obtener el próximo ID desde el intent
         nextId = getIntent().getIntExtra("next_id", 1);
 
-        // Fucnion para el boton de guardar
+        // Configurar Retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi+"/CrearContacto") // Cambia esto por la URL base de tu API
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        apiService = retrofit.create(ApiService.class);
+
+        // Función para el botón de guardar
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = nameEditText.getText().toString();
                 String phone = phoneEditText.getText().toString();
-                String id = String.valueOf(nextId); // Utilizar el ID recibido
+                String id = String.valueOf(nextId);
 
-                // Copiar el archivo XML desde res/raw a la carpeta de archivos internos
-                copyRawFileToInternalStorage();
-
-                // Modificar el archivo XML en la carpeta de archivos internos
-                modifyXmlFile(name, phone, id);
-
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("name", name);
-                resultIntent.putExtra("phone", phone);
-                resultIntent.putExtra("id", id);
-                setResult(RESULT_OK, resultIntent);
-                finish();
+                ListElements contacto = new ListElements(name, phone, id);
+                sendDataToApi(contacto);
             }
         });
     }
 
-    private void copyRawFileToInternalStorage() {
-        InputStream inputStream = getResources().openRawResource(R.raw.contacts);
-        File file = new File(getFilesDir(), "contacts.xml");
-
-        try {
-            OutputStream outputStream = new FileOutputStream(file);
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = inputStream.read(buffer)) > 0) {
-                outputStream.write(buffer, 0, length);
+    private void sendDataToApi(ListElements contacto) {
+        Call<ListElements> call = apiService.crearContacto(contacto);
+        call.enqueue(new Callback<ListElements>() {
+            @Override
+            public void onResponse(Call<ListElements> call, Response<ListElements> response) {
+                if (response.isSuccessful()) {
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("name", contacto.getNombre());
+                    resultIntent.putExtra("phone", contacto.getTel());
+                    //resultIntent.putExtra("id", contacto.getId());
+                    setResult(RESULT_OK, resultIntent);
+                    finish();
+                } else {
+                    // Manejar error en la respuesta
+                    Log.e("SendDataToApi", "Error en la respuesta del servidor: " + response.message());
+                }
             }
-            outputStream.flush();
-            outputStream.close();
-            inputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+            @Override
+            public void onFailure(Call<ListElements> call, Throwable t) {
+                // Manejar error en la solicitud
+                Log.e("SendDataToApi", "Error al enviar los datos: " + t.getMessage());
+            }
+        });
     }
-
-    private void modifyXmlFile(String name, String phone, String id) {
-        try {
-            // Obtener la ruta del archivo XML en la carpeta de archivos internos
-            File file = new File(getFilesDir(), "contacts.xml");
-
-            // Crear un objeto FileWriter para escribir en el archivo XML
-            FileWriter fileWriter = new FileWriter(file, true);
-
-            // Construir el texto XML para el nuevo contacto
-            String newContactXml = "<contact>\n" +
-                    "    <nombre>" + name + "</nombre>\n" +
-                    "    <tel>" + phone + "</tel>\n" +
-                    "    <id>" + id + "</id>\n" +
-                    "</contact>\n";
-
-            // Escribir la el texto XML en el archivo
-            fileWriter.write(newContactXml);
-
-            // Cerrar el FileWriter
-            fileWriter.close();
-
-            Log.d("ModifyXmlFile", "Nuevo contacto agregado al archivo XML en la carpeta de archivos internos.");
-        } catch (IOException e) {
-            Log.e("ModifyXmlFile", "Error al escribir en el archivo XML: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
 }
-
